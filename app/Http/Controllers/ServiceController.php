@@ -1,4 +1,5 @@
 <?php
+// app/Http/Controllers/ServiceController.php
 
 namespace App\Http\Controllers;
 
@@ -8,35 +9,64 @@ use Illuminate\Support\Facades\Validator;
 
 class ServiceController extends Controller
 {
-    /**
-     * Store a new service in the database.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\JsonResponse
-     */
+    public function index()
+    {
+        $services = Service::all();
+        return response()->json(['services' => $services]);
+    }
+
     public function store(Request $request)
     {
-        // Validate incoming request data
         $validator = Validator::make($request->all(), [
-            'service_title' => 'required|string|max:25',
-            'service_definition' => 'required|string'
+            'service_title' => 'required',
+            'service_definition' => 'required',
         ]);
 
-        // If validation fails, return a 422 Unprocessable Entity with the error messages
         if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()], 422);
+            return response()->json(['error' => $validator->errors()], 400);
         }
 
-        // Create a new service using the validated data
-        $service = new Service;
-        $service->service_title = $request->service_title;
-        $service->service_definition = $request->service_definition;
-        $service->save();
+        $service = Service::create($request->all());
+        return response()->json(['service' => $service], 201);
+    }
 
-        // Return a 201 Created response with the created service
-        return response()->json([
-            'message' => 'Service created successfully!',
-            'service' => $service
-        ], 201);
+    public function show($id)
+    {
+        $service = Service::find($id);
+        if (!$service) {
+            return response()->json(['error' => 'Service not found'], 404);
+        }
+        return response()->json(['service' => $service]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $service = Service::find($id);
+        if (!$service) {
+            return response()->json(['error' => 'Service not found'], 404);
+        }
+
+        $validator = Validator::make($request->all(), [
+            'service_title' => 'required',
+            'service_definition' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()], 400);
+        }
+
+        $service->update($request->all());
+        return response()->json(['message' => 'Service updated successfully']);
+    }
+
+    public function destroy($id)
+    {
+        $service = Service::find($id);
+        if (!$service) {
+            return response()->json(['error' => 'Service not found'], 404);
+        }
+
+        $service->delete();
+        return response()->json(['message' => 'Service deleted successfully']);
     }
 }
