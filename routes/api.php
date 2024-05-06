@@ -5,7 +5,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthenticationController;
 use App\Http\Controllers\Feed\FeedController;
 use App\Http\Controllers\ServiceController;
-
+use App\Http\Controllers\CityController;
+use App\Http\Controllers\SubcityController;
+use App\Http\Controllers\WoredaController;
+use App\Http\Controllers\KebeleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,3 +37,8 @@ Route::get('/test', function () {
 });
 Route::post('/register', [AuthenticationController::class, 'register']);
 Route::post('/login', [AuthenticationController::class, 'login']);
+
+Route::apiResource('cities', CityController::class);
+Route::apiResource('subcities', SubcityController::class);
+Route::apiResource('woredas', WoredaController::class);
+Route::apiResource('kebeles', KebeleController::class);
