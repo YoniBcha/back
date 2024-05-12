@@ -9,6 +9,7 @@ use App\Http\Controllers\CityController;
 use App\Http\Controllers\SubcityController;
 use App\Http\Controllers\WoredaController;
 use App\Http\Controllers\KebeleController;
+use App\Http\Controllers\JoblessController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,3 +43,7 @@ Route::apiResource('cities', CityController::class);
 Route::apiResource('subcities', SubcityController::class);
 Route::apiResource('woredas', WoredaController::class);
 Route::apiResource('kebeles', KebeleController::class);
+
+Route::apiResource('jobless', JoblessController::class);
+
+
