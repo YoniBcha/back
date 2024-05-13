@@ -14,8 +14,8 @@ class CreateJoblessTable extends Migration
             $table->string('jobless_password'); 
             $table->string('jobless_full_name');
             $table->string('jobless_grandfather_name')->nullable();
-            $table->enum('jobless_sex', ['Male', 'Female']);
-            $table->integer('jobless_age');
+            $table->enum('jobless_sex', ['Male', 'Female'])->default('Male');
+            $table->enum('jobless_status', ['Pending', 'Accepted', 'Failed'])->default('Pending'); // Set default value            $table->integer('jobless_age');
             $table->string('jobless_kebele');
             $table->string('jobless_woreda');
             $table->string('jobless_city');
