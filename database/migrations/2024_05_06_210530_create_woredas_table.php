@@ -1,24 +1,34 @@
 <?php
-namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
-class Woreda extends Model
+class CreateWoredasTable extends Migration
 {
-    use HasFactory;
-
-    protected $fillable = ['name', 'subcity_id'];
-
-    // Relationship with Subcity
-    public function subcity()
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
     {
-        return $this->belongsTo(Subcity::class);
+        Schema::create('woredas', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->unsignedBigInteger('subcity_id'); // Foreign key referencing the subcity table
+            $table->foreign('subcity_id')->references('id')->on('subcities');
+            $table->timestamps();
+        });
     }
 
-    // Relationship with Kebeles
-    public function kebeles()
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
     {
-        return $this->hasMany(Kebele::class);
+        Schema::dropIfExists('woredas');
     }
 }

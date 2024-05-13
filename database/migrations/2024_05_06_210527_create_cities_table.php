@@ -1,19 +1,32 @@
 <?php
 
-namespace App\Models;
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-
-class City extends Model
+class CreateCitiesTable extends Migration
 {
-    use HasFactory;
-
-    protected $fillable = ['name'];
-
-    // Relationship with Subcities
-    public function subcities()
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
     {
-        return $this->hasMany(Subcity::class);
+        Schema::create('cities', function (Blueprint $table) {
+            $table->id(); // Primary key (auto-incrementing integer)
+            $table->string('name'); // City name
+            $table->timestamps(); // Created and updated timestamps (optional)
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('cities');
     }
 }

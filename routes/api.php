@@ -10,6 +10,7 @@ use App\Http\Controllers\SubcityController;
 use App\Http\Controllers\WoredaController;
 use App\Http\Controllers\KebeleController;
 use App\Http\Controllers\JoblessController;
+use App\Http\Controllers\JoblessDocumentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,5 +46,5 @@ Route::apiResource('woredas', WoredaController::class);
 Route::apiResource('kebeles', KebeleController::class);
 
 Route::apiResource('jobless', JoblessController::class);
-
+Route::apiResource('jobless-documents', JoblessDocumentController::class);
 

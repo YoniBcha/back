@@ -1,18 +1,34 @@
 <?php
-namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
-class Kebele extends Model
+class CreateKebelesTable extends Migration
 {
-    use HasFactory;
-
-    protected $fillable = ['name', 'woreda_id'];
-
-    // Relationship with Woreda
-    public function woreda()
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
     {
-        return $this->belongsTo(Woreda::class);
+        Schema::create('kebeles', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->unsignedBigInteger('woreda_id'); // Foreign key referencing the woreda table
+            $table->foreign('woreda_id')->references('id')->on('woredas');
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('kebeles');
     }
 }

@@ -1,24 +1,34 @@
 <?php
-namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
-class Subcity extends Model
+class CreateSubcitiesTable extends Migration
 {
-    use HasFactory;
-
-    protected $fillable = ['name', 'city_id'];
-
-    // Relationship with City
-    public function city()
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
     {
-        return $this->belongsTo(City::class);
+        Schema::create('subcities', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->unsignedBigInteger('city_id'); // Foreign key referencing the city table
+            $table->foreign('city_id')->references('id')->on('cities');
+            $table->timestamps();
+        });
     }
 
-    // Relationship with Woredas
-    public function woredas()
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
     {
-        return $this->hasMany(Woreda::class);
+        Schema::dropIfExists('subcities');
     }
 }
