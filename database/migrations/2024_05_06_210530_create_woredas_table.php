@@ -15,7 +15,7 @@ class CreateWoredasTable extends Migration
     {
         Schema::create('woredas', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->unique(); 
             $table->unsignedBigInteger('subcity_id'); // Foreign key referencing the subcity table
             $table->foreign('subcity_id')->references('id')->on('subcities');
             $table->timestamps();

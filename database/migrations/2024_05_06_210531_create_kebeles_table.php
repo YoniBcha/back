@@ -15,7 +15,7 @@ class CreateKebelesTable extends Migration
     {
         Schema::create('kebeles', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->unique(); 
             $table->unsignedBigInteger('woreda_id'); // Foreign key referencing the woreda table
             $table->foreign('woreda_id')->references('id')->on('woredas');
             $table->timestamps();

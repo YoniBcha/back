@@ -15,13 +15,13 @@ class CreateJoblessTable extends Migration
             $table->string('jobless_full_name');
             $table->string('jobless_grandfather_name')->nullable();
             $table->integer('jobless_age');
-            $table->enum('jobless_sex', ['Male', 'Female'])->default('Male');
+            $table->enum('jobless_sex', ['Male', 'Female']);
             $table->enum('jobless_status', ['Pending', 'Accepted', 'Failed'])->default('Pending'); // Set default value            $table->integer('jobless_age');
             $table->string('jobless_kebele');
             $table->string('jobless_woreda');
             $table->string('jobless_city');
             $table->string('jobless_subcity');
-            $table->string('jobless_role');
+            $table->string('jobless_role')->default('jobless');
             $table->string('jobless_phonenumber');
             $table->string('jobless_email')->nullable();
             $table->string('jobless_profession');

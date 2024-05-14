@@ -11,6 +11,8 @@ use App\Http\Controllers\WoredaController;
 use App\Http\Controllers\KebeleController;
 use App\Http\Controllers\JoblessController;
 use App\Http\Controllers\JoblessDocumentController;
+use App\Http\Controllers\EnterpriseController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -47,4 +49,6 @@ Route::apiResource('kebeles', KebeleController::class);
 
 Route::apiResource('jobless', JoblessController::class);
 Route::apiResource('jobless-documents', JoblessDocumentController::class);
+
+Route::apiResource('enterprises', EnterpriseController::class);
 

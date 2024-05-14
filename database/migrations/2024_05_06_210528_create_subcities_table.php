@@ -15,7 +15,7 @@ class CreateSubcitiesTable extends Migration
     {
         Schema::create('subcities', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->unique();
             $table->unsignedBigInteger('city_id'); // Foreign key referencing the city table
             $table->foreign('city_id')->references('id')->on('cities');
             $table->timestamps();
